@@ -2,12 +2,12 @@
 
 namespace SimpleCQRS
 {
-    public class InventoryItemListDto
+    public class InventoryDto
     {
         public Guid Id;
         public string Name;
 
-        public InventoryItemListDto(Guid id, string name)
+        public InventoryDto(Guid id, string name)
         {
             Id = id;
             Name = name;

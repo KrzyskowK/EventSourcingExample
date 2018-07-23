@@ -11,7 +11,7 @@
 
         public override void Handle(RemoveItemsFromInventoryCommand command)
         {
-            var item = _store.GetById<InventoryItem>(command.InventoryItemId);
+            var item = _store.GetById<Inventory>(command.InventoryId);
             item.Remove(command.Count);
             _store.Save(item);
         }

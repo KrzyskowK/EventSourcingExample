@@ -4,12 +4,12 @@ namespace SimpleCQRS
 {
     public class RemoveItemsFromInventoryCommand : Command
     {
-        public Guid InventoryItemId;
+        public Guid InventoryId;
         public readonly int Count;
 
-        public RemoveItemsFromInventoryCommand(Guid inventoryItemId, int count)
+        public RemoveItemsFromInventoryCommand(Guid inventoryId, int count)
         {
-            InventoryItemId = inventoryItemId;
+            InventoryId = inventoryId;
             Count = count;
         }
     }

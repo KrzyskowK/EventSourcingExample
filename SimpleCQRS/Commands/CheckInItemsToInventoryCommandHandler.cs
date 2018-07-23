@@ -11,7 +11,7 @@
 
         public override void Handle(CheckInItemsToInventoryCommand command)
         {
-            var item = _store.GetById<InventoryItem>(command.InventoryItemId);
+            var item = _store.GetById<Inventory>(command.InventoryId);
             item.CheckIn(command.Count);
             _store.Save(item);
         }

@@ -61,17 +61,18 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CreateInventoryCommand.cs" />
+    <Compile Include="Commands\CreateInventoryCommandHandler.cs" />
+    <Compile Include="Commands\DeactivateInventoryCommand.cs" />
+    <Compile Include="Commands\DeactivateInventoryCommandHandler.cs" />
+    <Compile Include="Commands\RenameInventoryCommand.cs" />
+    <Compile Include="Commands\RenameInventoryCommandHandler.cs" />
+    <Compile Include="Domain\Inventory.cs" />
     <Compile Include="Infrastructure\BullShitDatabase.cs" />
     <Compile Include="Commands\CheckInItemsToInventoryCommand.cs" />
     <Compile Include="Commands\CheckInItemsToInventoryCommandHandler.cs" />
-    <Compile Include="Commands\CreateInventoryItemCommand.cs" />
-    <Compile Include="Commands\CreateInventoryItemCommandHandler.cs" />
-    <Compile Include="Commands\DeactivateInventoryItemCommand.cs" />
-    <Compile Include="Commands\DeactivateInventoryItemCommandHandler.cs" />
     <Compile Include="Commands\RemoveItemsFromInventoryCommand.cs" />
     <Compile Include="Commands\RemoveItemsFromInventoryCommandHandler.cs" />
-    <Compile Include="Commands\RenameInventoryItemCommand.cs" />
-    <Compile Include="Commands\RenameInventoryItemCommandHandler.cs" />
     <Compile Include="Infrastructure\Cqrs\CommandHandler.cs" />
     <Compile Include="Infrastructure\Cqrs\QueryHandler.cs" />
     <Compile Include="Infrastructure\EventSourcing\Event.cs" />
@@ -81,13 +82,12 @@
     <Compile Include="Infrastructure\InfrastructureCrap.DontBotherReadingItsNotImportant.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Infrastructure\Cqrs\Command.cs" />
-    <Compile Include="Domain\InventoryItem.cs" />
     <Compile Include="Queries\GetInventoryDetailsQueryHandler.cs" />
     <Compile Include="Queries\GetInventoryItemsQueryHandler.cs" />
-    <Compile Include="Views\InventoryItemDetailsDto.cs" />
-    <Compile Include="Views\InventoryItemDetailsView.cs" />
-    <Compile Include="Views\InventoryItemListDto.cs" />
-    <Compile Include="Views\InventoryListView.cs" />
+    <Compile Include="Views\InventoriesView.cs" />
+    <Compile Include="Views\InventoryDetailsDto.cs" />
+    <Compile Include="Views\InventoryDetailsView.cs" />
+    <Compile Include="Views\InventoryDto.cs" />
     <Compile Include="Infrastructure\Message.cs" />
   </ItemGroup>
   <ItemGroup>

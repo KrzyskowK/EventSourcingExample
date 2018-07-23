@@ -34,22 +34,22 @@ namespace CQRSGui
             var storage = new EventStore(bus);
 
             bus.RegisterHandler<CheckInItemsToInventoryCommand>(new CheckInItemsToInventoryCommandHandler(storage).Handle);
-            bus.RegisterHandler<CreateInventoryItemCommand>(new CreateInventoryItemCommandHandler(storage).Handle);
-            bus.RegisterHandler<DeactivateInventoryItemCommand>(new DeactivateInventoryItemCommandHandler(storage).Handle);
+            bus.RegisterHandler<CreateInventoryCommand>(new CreateInventoryCommandHandler(storage).Handle);
+            bus.RegisterHandler<DeactivateInventoryCommand>(new DeactivateInventoryCommandHandler(storage).Handle);
             bus.RegisterHandler<RemoveItemsFromInventoryCommand>(new RemoveItemsFromInventoryCommandHandler(storage).Handle);
-            bus.RegisterHandler<RenameInventoryItemCommand>(new RenameInventoryItemCommandHandler(storage).Handle);
+            bus.RegisterHandler<RenameInventoryCommand>(new RenameInventoryCommandHandler(storage).Handle);
 
-            var detailsView = new InventoryItemDetailsView();
-            bus.RegisterHandler<InventoryItem.Events.Created>(detailsView.Handle);
-            bus.RegisterHandler<InventoryItem.Events.Deactivated>(detailsView.Handle);
-            bus.RegisterHandler<InventoryItem.Events.Renamed>(detailsView.Handle);
-            bus.RegisterHandler<InventoryItem.Events.CheckedInToInventory>(detailsView.Handle);
-            bus.RegisterHandler<InventoryItem.Events.RemovedFromInventory>(detailsView.Handle);
+            var detailsView = new InventoryDetailsView();
+            bus.RegisterHandler<Inventory.Events.Created>(detailsView.Handle);
+            bus.RegisterHandler<Inventory.Events.Deactivated>(detailsView.Handle);
+            bus.RegisterHandler<Inventory.Events.Renamed>(detailsView.Handle);
+            bus.RegisterHandler<Inventory.Events.CheckedInToInventory>(detailsView.Handle);
+            bus.RegisterHandler<Inventory.Events.RemovedFromInventory>(detailsView.Handle);
 
-            var listView = new InventoryListView();
-            bus.RegisterHandler<InventoryItem.Events.Created>(listView.Handle);
-            bus.RegisterHandler<InventoryItem.Events.Renamed>(listView.Handle);
-            bus.RegisterHandler<InventoryItem.Events.Deactivated>(listView.Handle);
+            var listView = new InventoriesView();
+            bus.RegisterHandler<Inventory.Events.Created>(listView.Handle);
+            bus.RegisterHandler<Inventory.Events.Renamed>(listView.Handle);
+            bus.RegisterHandler<Inventory.Events.Deactivated>(listView.Handle);
             ServiceLocator.Bus = bus;
         }
     }

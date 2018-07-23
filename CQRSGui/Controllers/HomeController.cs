@@ -17,7 +17,7 @@ namespace CQRSGui.Controllers
 
         public ActionResult Index()
         {
-            ViewData.Model = new GetInventoryItemsQueryHandler().Handle();
+            ViewData.Model = new GetInventoriesQueryHandler().Handle();
             return View();
         }
 
@@ -35,7 +35,7 @@ namespace CQRSGui.Controllers
         [HttpPost]
         public ActionResult Add(string name)
         {
-            _bus.Send(new CreateInventoryItemCommand(Guid.NewGuid(), name));
+            _bus.Send(new CreateInventoryCommand(Guid.NewGuid(), name));
 
             return RedirectToAction("Index");
         }
@@ -49,7 +49,7 @@ namespace CQRSGui.Controllers
         [HttpPost]
         public ActionResult ChangeName(Guid id, string name, int version)
         {
-            var command = new RenameInventoryItemCommand(id, name);
+            var command = new RenameInventoryCommand(id, name);
             _bus.Send(command);
 
             return RedirectToAction("Index");
@@ -64,7 +64,7 @@ namespace CQRSGui.Controllers
         [HttpPost]
         public ActionResult Deactivate(Guid id, int version)
         {
-            _bus.Send(new DeactivateInventoryItemCommand(id));
+            _bus.Send(new DeactivateInventoryCommand(id));
             return RedirectToAction("Index");
         }
 

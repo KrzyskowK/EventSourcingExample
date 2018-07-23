@@ -2,13 +2,21 @@
 
 namespace SimpleCQRS
 {
-    public class InventoryItem : AggregateRoot
+    public class Inventory : AggregateRoot
     {
         private bool _activated;
         private string _name;
         private Guid _id;
 
         public override Guid Id => _id;
+
+        public static Inventory Create(Guid id, string name)
+        {
+            var item = new Inventory { _id = id };
+
+            item.ApplyChange(new Events.Created(id, name));
+            return item;
+        }
 
         public void ChangeName(string newName)
         {
@@ -34,17 +42,9 @@ namespace SimpleCQRS
             ApplyChange(new Events.Deactivated());
         }
 
-        public InventoryItem()
+        public Inventory()
         {
             // used to create in repository ... many ways to avoid this, eg making private constructor
-        }
-
-        public static InventoryItem Create(Guid id, string name)
-        {
-            var item = new InventoryItem { _id = id };
-
-            item.ApplyChange(new Events.Created(id, name));
-            return item;
         }
 
         private void Apply(Events.Created e)

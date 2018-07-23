@@ -2,9 +2,9 @@
 
 namespace SimpleCQRS.Queries
 {
-    public class GetInventoryItemsQueryHandler : QueryHandler<IEnumerable<InventoryItemListDto>>
+    public class GetInventoriesQueryHandler : QueryHandler<IEnumerable<InventoryDto>>
     {
-        public override IEnumerable<InventoryItemListDto> Handle()
+        public override IEnumerable<InventoryDto> Handle()
         {
             return BullShitDatabase.list;
         }

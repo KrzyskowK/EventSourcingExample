@@ -5,7 +5,7 @@ namespace SimpleCQRS
 {
     public static class BullShitDatabase
     {
-        public static Dictionary<Guid, InventoryItemDetailsDto> details = new Dictionary<Guid,InventoryItemDetailsDto>();
-        public static List<InventoryItemListDto> list = new List<InventoryItemListDto>();
+        public static Dictionary<Guid, InventoryDetailsDto> details = new Dictionary<Guid,InventoryDetailsDto>();
+        public static List<InventoryDto> list = new List<InventoryDto>();
     }
 }
