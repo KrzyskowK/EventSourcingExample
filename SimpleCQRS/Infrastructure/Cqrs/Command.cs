@@ -1,6 +1,6 @@
 namespace SimpleCQRS
 {
-    public class Command : Message
+    public abstract class Command : Message
     {
     }
 }

@@ -16,7 +16,6 @@ namespace SimpleCQRS
 
         private struct EventDescriptor
         {
-
             public readonly Event EventData;
             public readonly Guid Id;
             public readonly int Version;
@@ -45,7 +44,7 @@ namespace SimpleCQRS
             if(!_current.TryGetValue(aggregateId, out eventDescriptors))
             {
                 eventDescriptors = new List<EventDescriptor>();
-                _current.Add(aggregateId,eventDescriptors);
+                _current.Add(aggregateId, eventDescriptors);
                 expectedVersion = -1;
 
             }
@@ -62,6 +61,7 @@ namespace SimpleCQRS
             {
                 i++;
                 @event.Version = i;
+                @event.AggregateId = aggregateId;
 
                 // push event to the event descriptors list for current aggregate
                 eventDescriptors.Add(new EventDescriptor(aggregateId,@event,i));

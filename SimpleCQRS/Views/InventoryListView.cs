@@ -5,20 +5,20 @@
         EventHandler<InventoryItem.Events.Renamed>, 
         EventHandler<InventoryItem.Events.Deactivated>
     {
-        public void Handle(InventoryItem.Events.Created message)
+        public void Handle(InventoryItem.Events.Created @event)
         {
-            BullShitDatabase.list.Add(new InventoryItemListDto(message.Id, message.Name));
+            BullShitDatabase.list.Add(new InventoryItemListDto(@event.Id, @event.Name));
         }
 
-        public void Handle(InventoryItem.Events.Renamed message)
+        public void Handle(InventoryItem.Events.Renamed @event)
         {
-            var item = BullShitDatabase.list.Find(x => x.Id == message.Id);
-            item.Name = message.NewName;
+            var item = BullShitDatabase.list.Find(x => x.Id == @event.AggregateId);
+            item.Name = @event.NewName;
         }
 
-        public void Handle(InventoryItem.Events.Deactivated message)
+        public void Handle(InventoryItem.Events.Deactivated @event)
         {
-            BullShitDatabase.list.RemoveAll(x => x.Id == message.Id);
+            BullShitDatabase.list.RemoveAll(x => x.Id == @event.AggregateId);
         }
     }
 }

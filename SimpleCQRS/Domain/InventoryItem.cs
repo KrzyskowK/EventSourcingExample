@@ -8,33 +8,30 @@ namespace SimpleCQRS
         private string _name;
         private Guid _id;
 
+        public override Guid Id => _id;
+
         public void ChangeName(string newName)
         {
             if (string.IsNullOrEmpty(newName)) throw new ArgumentException("newName cannot be null or empty");
-            ApplyChange(new Events.Renamed(_id, newName));
+            ApplyChange(new Events.Renamed(newName));
         }
 
         public void Remove(int count)
         {
             if (count <= 0) throw new InvalidOperationException("cant remove negative count from inventory");
-            ApplyChange(new Events.RemovedFromInventory(_id, count));
+            ApplyChange(new Events.RemovedFromInventory(count));
         }
 
         public void CheckIn(int count)
         {
             if(count <= 0) throw new InvalidOperationException("must have a count greater than 0 to add to inventory");
-            ApplyChange(new Events.CheckedInToInventory(_id, count));
+            ApplyChange(new Events.CheckedInToInventory(count));
         }
 
         public void Deactivate()
         {
             if(!_activated) throw new InvalidOperationException("already deactivated");
-            ApplyChange(new Events.Deactivated(_id));
-        }
-
-        public override Guid Id
-        {
-            get { return _id; }
+            ApplyChange(new Events.Deactivated());
         }
 
         public InventoryItem()
@@ -42,9 +39,12 @@ namespace SimpleCQRS
             // used to create in repository ... many ways to avoid this, eg making private constructor
         }
 
-        public InventoryItem(Guid id, string name)
+        public static InventoryItem Create(Guid id, string name)
         {
-            ApplyChange(new Events.Created(id, name));
+            var item = new InventoryItem { _id = id };
+
+            item.ApplyChange(new Events.Created(id, name));
+            return item;
         }
 
         private void Apply(Events.Created e)
@@ -68,11 +68,8 @@ namespace SimpleCQRS
         {
             public class Deactivated : Event
             {
-                public readonly Guid Id;
-
-                public Deactivated(Guid id)
+                public Deactivated()
                 {
-                    Id = id;
                 }
             }
 
@@ -89,36 +86,30 @@ namespace SimpleCQRS
 
             public class Renamed : Event
             {
-                public readonly Guid Id;
                 public readonly string NewName;
 
-                public Renamed(Guid id, string newName)
+                public Renamed(string newName)
                 {
-                    Id = id;
                     NewName = newName;
                 }
             }
 
             public class CheckedInToInventory : Event
             {
-                public Guid Id;
                 public readonly int Count;
 
-                public CheckedInToInventory(Guid id, int count)
+                public CheckedInToInventory(int count)
                 {
-                    Id = id;
                     Count = count;
                 }
             }
 
             public class RemovedFromInventory : Event
             {
-                public Guid Id;
                 public readonly int Count;
 
-                public RemovedFromInventory(Guid id, int count)
+                public RemovedFromInventory(int count)
                 {
-                    Id = id;
                     Count = count;
                 }
             }

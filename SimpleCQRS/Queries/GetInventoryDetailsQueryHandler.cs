@@ -2,9 +2,9 @@
 
 namespace SimpleCQRS.Queries
 {
-    public class GetInventoryDetailsQueryHandler
+    public class GetInventoryDetailsQueryHandler : QueryHandler<Guid, InventoryItemDetailsDto>
     {
-        public InventoryItemDetailsDto Handle(Guid id)
+        public override InventoryItemDetailsDto Handle(Guid id)
         {
             return BullShitDatabase.details[id];
         }

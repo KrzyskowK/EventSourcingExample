@@ -7,35 +7,35 @@
         EventHandler<InventoryItem.Events.RemovedFromInventory>, 
         EventHandler<InventoryItem.Events.CheckedInToInventory>
     {
-        public void Handle(InventoryItem.Events.Created message)
+        public void Handle(InventoryItem.Events.Created @event)
         {
-            BullShitDatabase.details.Add(message.Id, new InventoryItemDetailsDto(message.Id, message.Name, 0,0));
+            BullShitDatabase.details.Add(@event.Id, new InventoryItemDetailsDto(@event.Id, @event.Name, 0,0));
         }
 
-        public void Handle(InventoryItem.Events.Renamed message)
+        public void Handle(InventoryItem.Events.Renamed @event)
         {
-            var d = BullShitDatabase.details[message.Id];
-            d.Name = message.NewName;
-            d.Version = message.Version;
+            var view = BullShitDatabase.details[@event.AggregateId];
+            view.Name = @event.NewName;
+            view.Version = @event.Version;
         }
 
-        public void Handle(InventoryItem.Events.RemovedFromInventory message)
+        public void Handle(InventoryItem.Events.RemovedFromInventory @event)
         {
-            var d = BullShitDatabase.details[message.Id];
-            d.CurrentCount -= message.Count;
-            d.Version = message.Version;
+            var view = BullShitDatabase.details[@event.AggregateId];
+            view.CurrentCount -= @event.Count;
+            view.Version = @event.Version;
         }
 
-        public void Handle(InventoryItem.Events.CheckedInToInventory message)
+        public void Handle(InventoryItem.Events.CheckedInToInventory @event)
         {
-            var d = BullShitDatabase.details[message.Id];
-            d.CurrentCount += message.Count;
-            d.Version = message.Version;
+            var view = BullShitDatabase.details[@event.AggregateId];
+            view.CurrentCount += @event.Count;
+            view.Version = @event.Version;
         }
 
-        public void Handle(InventoryItem.Events.Deactivated message)
+        public void Handle(InventoryItem.Events.Deactivated @event)
         {
-            BullShitDatabase.details.Remove(message.Id);
+            BullShitDatabase.details.Remove(@event.AggregateId);
         }
     }
 }
